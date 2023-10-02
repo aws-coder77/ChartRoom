@@ -1,5 +1,7 @@
 import React from "react";
 import "../index.css";
+import { Link } from "react-router-dom";
+
 function Navbar() {
   return (
     <>
@@ -7,12 +9,16 @@ function Navbar() {
         <h1 className="text-lg mx-5 ">Home page</h1>
 
         <div className=" flex ml-auto mx-2">
-          <div className=" mx-1 border rounded px-1 border-blue-400">
-            login in
-          </div>
-          <div className=" mx-1 border rounded px-1 border-blue-400">
-            sign in
-          </div>
+          <Link to="login">
+            <div className=" mx-1 border rounded px-1 border-blue-400">
+              login in
+            </div>
+          </Link>
+          <Link to="signup">
+            <div className=" mx-1 border rounded px-1 border-blue-400">
+              sign in
+            </div>
+          </Link>
           <div className="hidden  mx-1 border border-blue-400 rounded px-1">
             logout
           </div>
