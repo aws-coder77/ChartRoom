@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import Cookies from "js-cookie";
 import "../index.css";
 import Finduser from "../pages/finduser";
-const login = () => {
+import { useNavigate } from "react-router-dom";
+
+const Login = () => {
+  const navigate = useNavigate();
   const [loginComplete, setLoginComplete] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -41,7 +45,14 @@ const login = () => {
         body: JSON.stringify(requestData),
       });
       if (response.status === 201) {
-        setLoginComplete(true);
+        setLoginComplete(() => {});
+        const tokendata = await response.json();
+
+        const token = tokendata.token;
+
+        Cookies.set("storagecookies", token, { expires: 1 });
+        setFormData({ ...formData, password: "" });
+        navigate("/finduser");
       } else {
         const errorData = await response.json();
         setErrors(errorData);
@@ -52,9 +63,6 @@ const login = () => {
     setFormData({ ...formData, password: "" });
   };
 
-  if (loginComplete == true) {
-    return <Finduser />;
-  }
   return (
     <div className="flex justify-center items-center h-screen ">
       <div className=" m-4 p-2">
@@ -104,4 +112,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

@@ -1,6 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+
 function Maincontent() {
+  const navigate = useNavigate();
+
+  function handle() {
+    const token = Cookies.get("storagecookies");
+    console.log(token);
+    if (!token) {
+      navigate("/login");
+    } else {
+      navigate("/finduser");
+    }
+  }
   return (
     <>
       <div className=" text-center text-xl">
@@ -12,7 +26,7 @@ function Maincontent() {
           <p className="text-gray-800 w-80">
             click on button to find the user you want to chart
             <button className="border rounded-md border-slate-500 mx-2 px-2 text-blue-400">
-              <Link to="finduser"> click</Link>
+              <Link onClick={handle}>click</Link>
             </button>
           </p>
         </div>

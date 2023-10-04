@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "../index.css";
 import Finduser from "../pages/finduser";
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
-  const [registrationComplete, setRegistrationComplete] = useState(false);
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -49,7 +49,7 @@ const Signup = () => {
         body: JSON.stringify(requestData),
       });
       if (response.status === 201) {
-        setRegistrationComplete(true);
+        navigate("/login");
       } else {
         const errorData = await response.json();
         console.log(errorData);
@@ -60,9 +60,6 @@ const Signup = () => {
     }
     setFormData({ ...formData, password: "", confirmPassword: "" });
   };
-  if (registrationComplete == true) {
-    return <Finduser />;
-  }
   return (
     <div className="flex justify-center items-center h-screen ">
       <div className=" m-4 p-2">
