@@ -9,11 +9,13 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(cors({ origin: "http://localhost:5173" }));
 
-const mongoURL = "mongodb://127.0.0.1:27017/chartroom";
+const mongoURL = "mongodb://127.0.0.1:27017/chatroom";
 // const server = new WebSocket.Server({ port: 8080 });
-const Useraccount = require("./routes/userRoutes.jsx");
+const Useraccount = require("./routes/userRoutes");
+const Userchat = require("./routes/userdata");
 
 app.use("/user", Useraccount);
+app.use("/chat", Userchat);
 
 mongoose
   .connect(mongoURL, {

@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
-
+const Usermodels = require("./usermodels");
 const DataSchema = new mongoose.Schema({
   userId1: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Usermodels,
+    required: true,
   },
   userId2: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Usermodels,
+    required: true,
   },
   testArray: [
     {
@@ -22,5 +26,5 @@ const DataSchema = new mongoose.Schema({
   ],
 });
 
-const Datamodels = mongoose.model("users", DataSchema);
+const Datamodels = mongoose.model("chatdata", DataSchema);
 module.exports = Datamodels;

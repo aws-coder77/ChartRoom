@@ -1,5 +1,6 @@
 import React from "react";
 import "../index.css";
+
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white py-4 bottom-0 w-full fixed">
